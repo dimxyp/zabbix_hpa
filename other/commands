@@ -1,0 +1,24 @@
+kubectl logs -f pods/zabbix-agent-hpa-custom-78988f45dd-pnsmh -n zbx
+
+
+
+
+
+cat /etc/zabbix/zabbix_agent2.conf | grep -v "#" | sed '/^[[:space:]]*$/d'
+
+
+
+
+upload to minikube
+eval $(minikube -p minikube docker-env)
+docker build -t hpa_zabbix:v12 . 
+minikube image ls --format table
+kubectl apply -f hpa_zabbix.yaml
+
+
+
+
+
+p=$(kubectl get pods -n zbx -l app=zabbix-agent-hpa-custom -o name | grep -m 1 zabbix-agent-hpa-custom);kubectl logs -f -n zbx "$p" 
+
+p=$(kubectl get pods -l app=zabbix-agent-hpa-custom -o name | grep -m 1 zabbix-agent-hpa-custom);kubectl exec -it "$p" -- /bin/sh

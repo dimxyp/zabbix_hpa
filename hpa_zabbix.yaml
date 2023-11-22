@@ -1,0 +1,45 @@
+# zabbix-agent-deployment.yaml
+# kubectl create configmap zabbix-hpa-custom-config --from-file=hpa_conf/ -n zbx
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zabbix-agent-hpa-custom
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zabbix-agent-hpa-custom
+  template:
+    metadata:
+      labels:
+        app: zabbix-agent-hpa-custom
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+      - name: zabbix-agent-hpa-custom
+        image: hpa_zabbix:v14
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsUser: 0
+        # volumeMounts:
+        # - name: zabbix-hpa-custom-config-volume
+        #   mountPath: /etc/zabbix/zabbix_agentd.d
+        # initContainers:
+        # - name: fix-permissions
+        #   command: ["chmod", "+x", "/etc/zabbix/zabbix_agentd.d/hpa-execute.sh"]
+        env:
+        - name: ZBX_HOSTNAME
+          value: "aks-test-hpa-custom"
+        - name: ZBX_DEBUGLEVEL
+          value: "3"
+        - name: ZBX_ACTIVE_ALLOW
+          value: "true"     
+        - name: ZBX_SERVER_HOST
+          value: "192.168.0.69"  
+      # volumes:
+      # - name:  zabbix-hpa-custom-config-volume
+      #   configMap:
+      #     name: zabbix-hpa-custom-config

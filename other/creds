@@ -1,0 +1,19 @@
+#!/bin/bash
+
+withCredentials\([string\(credentialsId: 'azure_cli_password', variable: 'AZURE_CLI_PASSWORD'\),string\(credentialsId: 'azure_cli_tenant', variable: 'AZURE_CLI_TENANT'\),tring\(credentialsId: 'azure_cli_username', variable: 'AZURE_CLI_USERNAME'\)]\) {
+
+    echo "Azure CLI Password: $AZURE_CLI_PASSWORD"
+    echo "Azure CLI Tenant: $AZURE_CLI_TENANT"
+    echo "Azure CLI Username: $AZURE_CLI_USERNAME"
+
+
+    Azure CLI Password: OGC8Q~EvDTPQ76jBSruWEZEb2ZUfGTPAeKQSfcCK
+Azure CLI Tenant: b11b0e93-0aec-47ed-bbaf-fc3e014e0b35
+Azure CLI Username: 7af45c88-b300-4e6d-a5a2-c480ef6a8105
+
+
+
+1QL8Q~FilrpsQ-9OFxlYhbKVyGh2I6b~q_C5DbFK
+
+
+az login --service-prinicapl --username "7af45c88-b300-4e6d-a5a2-c480ef6a8105" --password "1QL8Q~FilrpsQ-9OFxlYhbKVyGh2I6b~q_C5DbFK" --tenant "b11b0e93-0aec-47ed-bbaf-fc3e014e0b35"
