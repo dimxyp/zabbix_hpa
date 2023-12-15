@@ -1,4 +1,5 @@
 #!/bin/bash
+# use with $1 tagnumber $2 env.
 az login --service-principal --username "7af45c88-b300-4e6d-a5a2-c480ef6a8105" --password "1QL8Q~FilrpsQ-9OFxlYhbKVyGh2I6b~q_C5DbFK" --tenant "b11b0e93-0aec-47ed-bbaf-fc3e014e0b35"
 if [ "$2" == "prod" ]; then
     echo "register prod"
